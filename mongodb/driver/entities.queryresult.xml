@@ -1,6 +1,0 @@
-&reference.phongo.mongodb.driver.queryresult.construct;
-&reference.phongo.mongodb.driver.queryresult.getiterator;
-&reference.phongo.mongodb.driver.queryresult.getserver;
-&reference.phongo.mongodb.driver.queryresult.setiteratorclass;
-&reference.phongo.mongodb.driver.queryresult.setiteratorinitcallback;
-&reference.phongo.mongodb.driver.queryresult.settypemap;

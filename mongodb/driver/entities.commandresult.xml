@@ -1,6 +1,0 @@
-&reference.phongo.mongodb.driver.commandresult.construct;
-&reference.phongo.mongodb.driver.commandresult.getiterator;
-&reference.phongo.mongodb.driver.commandresult.getresponsedocument;
-&reference.phongo.mongodb.driver.commandresult.getserver;
-&reference.phongo.mongodb.driver.commandresult.setiteratorclass;
-&reference.phongo.mongodb.driver.commandresult.setiteratorinitcallback;
