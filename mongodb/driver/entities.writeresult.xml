@@ -1,0 +1,10 @@
+&reference.phongo.mongodb.driver.writeresult.getdeletedcount;
+&reference.phongo.mongodb.driver.writeresult.getinfo;
+&reference.phongo.mongodb.driver.writeresult.getinsertedcount;
+&reference.phongo.mongodb.driver.writeresult.getmatchedcount;
+&reference.phongo.mongodb.driver.writeresult.getmodifiedcount;
+&reference.phongo.mongodb.driver.writeresult.getserver;
+&reference.phongo.mongodb.driver.writeresult.getupsertedcount;
+&reference.phongo.mongodb.driver.writeresult.getupsertedids;
+&reference.phongo.mongodb.driver.writeresult.getwriteconcernerror;
+&reference.phongo.mongodb.driver.writeresult.getwriteerrors;

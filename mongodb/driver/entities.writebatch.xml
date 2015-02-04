@@ -1,0 +1,5 @@
+&reference.phongo.mongodb.driver.writebatch.construct;
+&reference.phongo.mongodb.driver.writebatch.count;
+&reference.phongo.mongodb.driver.writebatch.delete;
+&reference.phongo.mongodb.driver.writebatch.insert;
+&reference.phongo.mongodb.driver.writebatch.update;

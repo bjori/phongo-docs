@@ -1,0 +1,3 @@
+&reference.phongo.mongodb.driver.writeerror.getcode;
+&reference.phongo.mongodb.driver.writeerror.getindex;
+&reference.phongo.mongodb.driver.writeerror.getmessage;
