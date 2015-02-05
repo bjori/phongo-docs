@@ -10,10 +10,10 @@
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeQuery</methodname>
+   <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\QueryResult</type><methodname>MongoDB\Driver\Manager::executeQuery</methodname>
    <methodparam><type>string</type><parameter>namespace</parameter></methodparam>
-   <methodparam><type>Query</type><parameter>query</parameter></methodparam>
-   <methodparam choice="opt"><type>array</type><parameter>readPreference</parameter></methodparam>
+   <methodparam><type>MongoDB\Driver\Query</type><parameter>query</parameter></methodparam>
+   <methodparam choice="opt"><type>MongoDB\Driver\ReadPreference</type><parameter>readPreference</parameter></methodparam>
   </methodsynopsis>
   <para>
 
@@ -29,7 +29,7 @@
     <term><parameter>query</parameter></term>
     <listitem>
      <para>
-      
+      A <classname>MongoDB\Driver\Query</classname> to execute.
      </para>
     </listitem>
    </varlistentry>
@@ -40,17 +40,17 @@
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   
+   Returns <classname>MongoDB\Driver\QueryResult</classname> on success, &phongo.throws.onfailure;.
   </para>
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.std;
+   <member>Throws <classname>MongoDB\Driver\RuntimeException</classname> on other errors, such as invalid queries</member>
+  </simplelist>
  </refsect1>
-
 
  <refsect1 role="examples">
   &reftitle.examples;
@@ -59,26 +59,42 @@
    <programlisting role="php">
 <![CDATA[
 <?php
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-/* ... */
+$filter = array(
+    "tag" => "phongo",
+    "views" => array('$gt' => 5),
+);
+$options = array(
+    "projection" => array(
+        "title" => 1,
+        "article" => 1,
+    ),
+    "sort" => array(
+        "views" => -1,
+    ),
+);
+$readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
+$query = new MongoDB\Driver\Query($filter, $options);
+
+$result = $manager->executeQuery("databaseName.collectionName", $query, $readPreference);
+
+foreach($result as $document) {
+    echo $document["title"], "\n";
+}
 
 ?>
 ]]>
    </programlisting>
-   &example.outputs.similar;
-   <screen>
-<![CDATA[
-...
-]]>
-   </screen>
   </example>
  </refsect1>
-
 
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><classname>MongoDB\Driver\Query</classname></member>
+   <member><classname>MongoDB\Driver\QueryResult</classname></member>
+   <member><classname>MongoDB\Driver\ReadPreference</classname></member>
   </simplelist>
  </refsect1>
 

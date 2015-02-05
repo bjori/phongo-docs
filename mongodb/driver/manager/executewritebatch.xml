@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executewritebatch" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeWriteBatch</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Execute Write Operation(s)</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -12,13 +12,18 @@
   <methodsynopsis>
    <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname>
    <methodparam><type>string</type><parameter>namespace</parameter></methodparam>
-   <methodparam><type>WriteBatch</type><parameter>batch</parameter></methodparam>
-   <methodparam choice="opt"><type>array</type><parameter>writeConcern</parameter></methodparam>
+   <methodparam><type>MongoDB\Driver\WriteBatch</type><parameter>batch</parameter></methodparam>
+   <methodparam choice="opt"><type>MongoDB\Driver\WriteConcern</type><parameter>writeConcern</parameter></methodparam>
   </methodsynopsis>
   <para>
-
+   Executes one or more write operations.
   </para>
-
+  <para>
+   A <classname>MongoDB\Driver\WriteBatch</classname> can be constructed with
+   multiple different types of write operations (e.g. updates, deletes, and
+   inserts) in the same batch. The driver will attempt to send as many operations
+   to the server as it can at the same time, optimizing roundtrips.
+  </para>
  </refsect1>
 
  <refsect1 role="parameters">
@@ -29,35 +34,27 @@
     <term><parameter>batch</parameter></term>
     <listitem>
      <para>
-      
+      The <classname>MongoDB\Driver\WriteBatch</classname> to execute.
      </para>
     </listitem>
    </varlistentry>
-   <varlistentry>
-    <term><parameter>writeConcern</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
+   &phongo.parameter.writeConcern;
   </variablelist>
  </refsect1>
 
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
-  <para>
-   
-  </para>
+  &phongo.returns.WriteResult;
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.std;
+   <member>Throws <classname>MongoDB\Driver\RuntimeException</classname> on other errors.</member>
+  </simplelist>
+  &phongo.warning.noexception;
  </refsect1>
-
 
  <refsect1 role="examples">
   &reftitle.examples;
@@ -66,26 +63,71 @@
    <programlisting role="php">
 <![CDATA[
 <?php
+$batch = new MongoDB\Driver\WriteBatch();
 
-/* ... */
+$batch->insert(array("_id" => 1, "x" => 1));
+$batch->insert(array("_id" => 2, "x" => 2));
 
+$batch->update(array(  "x" => 2), array('$set' => array("x" => 1)), array("limit" => 1, "upsert" => false));
+$batch->update(array(  "x" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
+$batch->update(array("_id" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
+
+$batch->insert(array("_id" => 4, "x" => 2));
+
+$batch->delete(array("x" => 1), array("limit" => 1));
+
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
+$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+
+printf("Inserted %d document(s)\n", $result->getInsertedCount());
+printf("Matched  %d document(s)\n", $result->getMatchedCount());
+printf("Updated  %d document(s)\n", $result->getModifiedCount());
+printf("Upserted %d document(s)\n", $result->getUpsertedCount());
+printf("Deleted  %d document(s)\n", $result->getDeletedCount());
+
+foreach ($result->getUpsertedIds() as $index => $id) {
+    printf("upsertedId[%d]: ", $index);
+    var_dump($id);
+}
+
+/* If the WriteConcern could not be fullfilled */
+if ($writeConcernError = $result->getWriteConcernError()) {
+    printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
+}
+
+/* If a write could not happen at all */
+foreach ($result->getWriteErrors() as $writeError) {
+    printf("Operation#%d: %s (%d)\n", $error->getIndex(), $error->getMessage(), $error->getCode());
+}
 ?>
 ]]>
    </programlisting>
    &example.outputs.similar;
    <screen>
 <![CDATA[
-...
+Inserted 3 document(s)
+Matched  1 document(s)
+Updated  1 document(s)
+Upserted 2 document(s)
+Deleted  1 document(s)
+upsertedId[3]: object(BSON\ObjectID)#5 (1) {
+  ["oid"]=>
+  string(24) "54d3adc3ce7a792f4d703756"
+}
+upsertedId[4]: int(3)
 ]]>
    </screen>
   </example>
  </refsect1>
 
-
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><classname>MongoDB\Driver\WriteBatch</classname></member>
+   <member><classname>MongoDB\Driver\WriteResult</classname></member>
+   <member><classname>MongoDB\Driver\WriteConcern</classname></member>
   </simplelist>
  </refsect1>
 

@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executecommand" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeCommand</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Execute a MongoDB database command</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -47,21 +47,17 @@
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   Returns <classname>MongoDB\Driver\CommandResult</classname> on success, throws exception on failure.
+   Returns <classname>MongoDB\Driver\CommandResult</classname> on success, &phongo.throws.onfailure;.
   </para>
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
   <simplelist>
-   <member>Throws <classname>InvalidArgumentException</classname> on argument parsing errors.</member>
-   <member>Throws <classname>MongoDB\Driver\DuplicateKeyException</classname> if the <parameter>command</parameter> is a write which causes Duplicate Key error</member>
-   <member>Throws <classname>MongoDB\Driver\AuthenticationException</classname> if authentication is needed and fails</member>
-   <member>Throws <classname>MongoDB\Driver\ConnectionException</classname> if connection to the server fails for other then authentication reasons</member>
+   &phongo.throws.std;
    <member>Throws <classname>MongoDB\Driver\RuntimeException</classname> on other errors (invalid command, command arguments, ...)</member>
   </simplelist>
  </refsect1>
-
 
  <refsect1 role="examples">
   &reftitle.examples;
@@ -72,8 +68,8 @@
 <?php
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-
 $command = new MongoDB\Driver\Command(array("ping" => 1));
+
 try {
     $result = $manager->executeCommand("admin", $command);
     $response = $result->getResponseDocument();
@@ -100,7 +96,6 @@ array(1) {
   </example>
  </refsect1>
 
-
  <refsect1 role="notes">
   &reftitle.notes;
   <note>
@@ -118,7 +113,6 @@ array(1) {
    </para>
   </note>
  </refsect1>
-
 
  <refsect1 role="seealso">
   &reftitle.seealso;

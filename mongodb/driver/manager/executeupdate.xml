@@ -1,24 +1,24 @@
-j?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
 <refentry xml:id="mongodb-driver-manager.executeupdate" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeUpdate</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Convenience method for single update operation</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <smodifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeUpdate</methodname>
+   <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeUpdate</methodname>
    <methodparam><type>string</type><parameter>namespace</parameter></methodparam>
-   <methodparam><type>string</type><parameter>query</parameter></methodparam>
-   <methodparam><type>string</type><parameter>newObj</parameter></methodparam>
+   <methodparam><type>array|object</type><parameter>filter</parameter></methodparam>
+   <methodparam><type>array|object</type><parameter>newObj</parameter></methodparam>
    <methodparam choice="opt"><type>array</type><parameter>updateOptions</parameter></methodparam>
-   <methodparam choice="opt"><type>array</type><parameter>writeConcern</parameter></methodparam>
+   <methodparam choice="opt"><type>MongoDB\Driver\WriteConcern</type><parameter>writeConcern</parameter></methodparam>
   </methodsynopsis>
   <para>
-
+   Convenience method to execute a <classname>MongoDB\Driver\WriteBatch</classname> with only one update operation.
   </para>
 
  </refsect1>
@@ -27,19 +27,12 @@ j?xml version="1.0" encoding="utf-8"?>
   &reftitle.parameters;
   <variablelist>
    &phongo.parameter.namespace;
-   <varlistentry>
-    <term><parameter>query</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
+   &phongo.parameter.filter;
    <varlistentry>
     <term><parameter>newObj</parameter></term>
     <listitem>
      <para>
-      
+      Either an array of update operators, or the full object to be replaced with
      </para>
     </listitem>
    </varlistentry>
@@ -47,35 +40,52 @@ j?xml version="1.0" encoding="utf-8"?>
     <term><parameter>updateOptions</parameter></term>
     <listitem>
      <para>
-      
+      <table>
+       <title>updateOptions</title>
+       <tgroup cols="4">
+        <thead>
+         <row>
+          <entry>Option</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Default</entry>
+         </row>
+        </thead>
+        <tbody>
+         <row>
+          <entry>limit</entry>
+          <entry>boolean</entry>
+          <entry>Update only the first matching document (limit=1), or all matching documents (limit=0)</entry>
+          <entry>1</entry>
+         </row>
+         <row>
+          <entry>upsert</entry>
+          <entry>boolean</entry>
+          <entry>If <parameter>filter</parameter> does not match an existing document, insert the <parameter>newObj</parameter> as a new object, applying any atomic modifiers to the <parameter>filter</parameter> if applicable.</entry>
+          <entry>0</entry>
+         </row>
+        </tbody>
+       </tgroup>
+      </table>
      </para>
     </listitem>
    </varlistentry>
-   <varlistentry>
-    <term><parameter>writeConcern</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
+   &phongo.parameter.writeConcern;
   </variablelist>
  </refsect1>
 
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
-  <para>
-   
-  </para>
+  &phongo.returns.WriteResult;
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.std;
+  </simplelist>
+  &phongo.warning.noexception;
  </refsect1>
-
 
  <refsect1 role="examples">
   &reftitle.examples;
@@ -84,26 +94,121 @@ j?xml version="1.0" encoding="utf-8"?>
    <programlisting role="php">
 <![CDATA[
 <?php
+$criteria = array(
+    "tag" => "phongo",
+);
+$document = array(
+    '$set' => array(
+        "rating" => 5,
+    ),
+);
+$updateOptions = array(
+    "limit" => 0,
+);
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
 
-/* ... */
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$result = $manager->executeUpdate("mydb.collection", $criteria, $document, $updateOptions, $writeConcern);
 
+printf("Updated %d document(s)\n", $result->getModifiedCount());
+printf("Matched %d document(s)\n", $result->getMatchedCount());
+printf("Upserted documents: %d\n", $result->getUpsertedCount());
+foreach ($result->getUpsertedIds() as $index => $id) {
+    printf("upsertedId[%d]: ", $index);
+    var_dump($id);
+}
+
+/* If the WriteConcern could not be fullfilled */
+if ($writeConcernError = $result->getWriteConcernError()) {
+    printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
+}
+
+/* If the write could not happen at all */
+foreach ($result->getWriteErrors() as $writeError) {
+    printf("%s (%d)\n", $error->getMessage(), $error->getCode());
+}
 ?>
 ]]>
    </programlisting>
    &example.outputs.similar;
    <screen>
 <![CDATA[
-...
+Updated 0 document(s)
+Matched 0 document(s)
+Upserted documents: 0
+]]>
+   </screen>
+  </example>
+  <example>
+   <title><function>MongoDB\Driver\Manager::executeUpdate</function> with upsert</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+$criteria = array(
+    "tag" => "phongo",
+);
+$document = array(
+    '$set' => array(
+        "rating" => 5,
+    ),
+);
+$updateOptions = array(
+    "limit" => 0,
+    "upsert" => 1,
+);
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$result = $manager->executeUpdate("mydb.collection", $criteria, $document, $updateOptions, $writeConcern);
+
+printf("Updated %d document(s)\n", $result->getModifiedCount());
+printf("Matched %d document(s)\n", $result->getMatchedCount());
+printf("Upserted documents: %d\n", $result->getUpsertedCount());
+foreach ($result->getUpsertedIds() as $index => $id) {
+    printf("upsertedId[%d]: ", $index);
+    var_dump($id);
+}
+
+/* If the WriteConcern could not be fullfilled */
+if ($writeConcernError = $result->getWriteConcernError()) {
+    printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
+}
+
+/* If the write could not happen at all */
+foreach ($result->getWriteErrors() as $writeError) {
+    printf("%s (%d)\n", $error->getMessage(), $error->getCode());
+}
+?>
+]]>
+   </programlisting>
+   &example.outputs.similar;
+   <screen>
+<![CDATA[
+Updated 0 document(s)
+Matched 0 document(s)
+Upserted documents: 1
+upsertedId[0]: object(BSON\ObjectID)#3 (1) {
+  ["oid"]=>
+  string(24) "54d2c0d14c245fbe70d32ccf"
+}
+
 ]]>
    </screen>
   </example>
  </refsect1>
 
+ <refsect1 role="notes">
+  &reftitle.notes;
+  &phongo.note.getwriteerrors;
+  &phongo.note.getupsertedids;
+ </refsect1>
 
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><methodname>MongoDB\Driver\WriteBatch::update</methodname></member>
+   <member><classname>MongoDB\Driver\WriteResult</classname></member>
+   <member><classname>MongoDB\Driver\WriteConcern</classname></member>
   </simplelist>
  </refsect1>
 
