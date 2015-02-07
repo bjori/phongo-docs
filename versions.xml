@@ -125,6 +125,18 @@
  <function name='mongodb\driver\runtimeexception::gettraceasstring' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\runtimeexception::__tostring' from='phongo &gt;=0.4.0'/>
 
+ <function name='mongodb\driver\invalidargumentexception' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::__clone' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::__construct' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::getmessage' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::getcode' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::getfile' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::getline' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::gettrace' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::getprevious' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::gettraceasstring' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\invalidargumentexception::__tostring' from='phongo &gt;=0.4.0'/>
+
  <function name='mongodb\driver\connectionexception' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\connectionexception::__clone' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\connectionexception::__construct' from='phongo &gt;=0.4.0'/>
