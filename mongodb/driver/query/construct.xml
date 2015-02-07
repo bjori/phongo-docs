@@ -4,15 +4,15 @@
 <refentry xml:id="mongodb-driver-query.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Query::__construct</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Construct new Query</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
    <modifier>final</modifier> <modifier>public</modifier> <methodname>MongoDB\Driver\Query::__construct</methodname>
-   <methodparam><type>string</type><parameter>filter</parameter></methodparam>
-   <methodparam choice="opt"><type>array</type><parameter>options</parameter></methodparam>
+   <methodparam><type>array|object</type><parameter>filter</parameter></methodparam>
+   <methodparam choice="opt"><type>array</type><parameter>queryOptions</parameter></methodparam>
   </methodsynopsis>
   <para>
 
@@ -23,37 +23,71 @@
  <refsect1 role="parameters">
   &reftitle.parameters;
   <variablelist>
+   &phongo.parameter.filter;
    <varlistentry>
-    <term><parameter>filter</parameter></term>
+    <term><parameter>queryOptions</parameter></term>
     <listitem>
      <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><parameter>options</parameter></term>
-    <listitem>
-     <para>
-      
+      <table>
+       <title>queryOptions</title>
+       <tgroup cols="4">
+        <thead>
+         <row>
+          <entry>Option</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+         </row>
+        </thead>
+        <tbody>
+         <row>
+          <entry>limit</entry>
+          <entry><type>integer</type></entry>
+          <entry>Client side maximum number of documents to return</entry>
+         </row>
+         <row>
+          <entry>batchSize</entry>
+          <entry><type>integer</type></entry>
+          <entry>The number of documents to return per batch</entry>
+         </row>
+         <row>
+          <entry>queryFlags</entry>
+          <entry><type>integer</type></entry>
+          <entry>One or more of the <link linkend="mongodb-driver-query.constants">query flags</link> to use</entry>
+         </row>
+         <row>
+          <entry>skip</entry>
+          <entry><type>integer</type></entry>
+          <entry>The number of documents to skip before returning</entry>
+         </row>
+         <row>
+          <entry>sort</entry>
+          <entry><type>array|object</type></entry>
+          <entry>The order in which to return matching documents</entry>
+         </row>
+         <row>
+          <entry>modifiers</entry>
+          <entry><type>array</type></entry>
+          <entry>Meta-operators modifying the output or behavior of a query</entry>
+         </row>
+         <row>
+          <entry>projection</entry>
+          <entry><type>array|object</type></entry>
+          <entry>Limits the fields to return for all matching documents</entry>
+         </row>
+        </tbody>
+       </tgroup>
+      </table>
      </para>
     </listitem>
    </varlistentry>
   </variablelist>
  </refsect1>
 
- <refsect1 role="returnvalues">
-  &reftitle.returnvalues;
-  <para>
-   
-  </para>
- </refsect1>
-
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.argumentparsing;
+  </simplelist>
  </refsect1>
 
 
@@ -64,26 +98,44 @@
    <programlisting role="php">
 <![CDATA[
 <?php
+$filter = array();
+$options = array(
+    /* Only return the following fields in the matching documents */
+    "projection" => array(
+        "title" => 1,
+        "article" => 1,
+    ),
+    "sort" => array(
+        "views" => -1,
+    ),
+    "modifiers" => array(
+        '$comment'   => "This is a query comment",
+        '$maxTimeMS' => 100,
+    ),
+);
 
-/* ... */
+$query = new MongoDB\Driver\Query($filter, $options);
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
+$result = $manager->executeQuery("databaseName.collectionName", $query, $readPreference);
+
+foreach($result as $document) {
+    var_dump($document);
+}
 
 ?>
 ]]>
    </programlisting>
-   &example.outputs.similar;
-   <screen>
-<![CDATA[
-...
-]]>
-   </screen>
   </example>
  </refsect1>
-
 
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><methodname>MongoDB\Driver\Manager::executeQuery</methodname></member>
+   <member><classname>MongoDB\Driver\QueryResult</classname></member>
+   <member><link xlink:href="&url.mongodb.docs;reference/operator/query-modifier/#modifiers">MongoDB Query Modifiers</link></member>
   </simplelist>
  </refsect1>
 

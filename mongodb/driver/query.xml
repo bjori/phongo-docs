@@ -12,7 +12,8 @@
   <section xml:id="mongodb-driver-query.intro">
    &reftitle.intro;
    <para>
-
+    The <classname>MongoDB\Driver\Query</classname> class is a value object
+    encapsulating a MongoDB Query.
    </para>
   </section>
 <!-- }}} -->
@@ -26,6 +27,7 @@
 
 <!-- {{{ Class synopsis -->
     <classsynopsisinfo>
+     <modifier>final</modifier>
      <ooclass>
       <classname>MongoDB\Driver\Query</classname>
      </ooclass>
@@ -91,61 +93,66 @@
 <!-- {{{ MongoDB\Driver\Query constants -->
   <section xml:id="mongodb-driver-query.constants">
    &reftitle.constants;
+   <para>
+    These flags correspond to the MongoDB wire protocol. They may be bitwise
+    or'd together. They may modify how a query is performed in the MongoDB
+    server.
+   </para>
    <variablelist>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-none">
      <term><constant>MongoDB\Driver\Query::FLAG_NONE</constant></term>
      <listitem>
-      <para></para>
+      <para>Specify no query flags.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-tailable-cursor">
      <term><constant>MongoDB\Driver\Query::FLAG_TAILABLE_CURSOR</constant></term>
      <listitem>
-      <para></para>
+      <para>Cursor will not be closed when the last data is retrieved. You can resume this cursor later.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-slave-ok">
      <term><constant>MongoDB\Driver\Query::FLAG_SLAVE_OK</constant></term>
      <listitem>
-      <para></para>
+      <para>Allow query of replica set secondaries.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-oplog-replay">
      <term><constant>MongoDB\Driver\Query::FLAG_OPLOG_REPLAY</constant></term>
      <listitem>
-      <para></para>
+      <para>Used internally by MongoDB.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-no-cursor-timeout">
      <term><constant>MongoDB\Driver\Query::FLAG_NO_CURSOR_TIMEOUT</constant></term>
      <listitem>
-      <para></para>
+      <para>The server normally times out an idle cursor after an inactivity period (10 minutes). This prevents that.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-await-data">
      <term><constant>MongoDB\Driver\Query::FLAG_AWAIT_DATA</constant></term>
      <listitem>
-      <para></para>
+      <para>Use with MONGOC_QUERY_TAILABLE_CURSOR. Block rather than returning no data. After a period, time out.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-exhaust">
      <term><constant>MongoDB\Driver\Query::FLAG_EXHAUST</constant></term>
      <listitem>
-      <para></para>
+      <para>Stream the data down full blast in multiple "reply" packets. Faster when you are pulling down a lot of data and you know you want to retrieve it all.</para>
      </listitem>
     </varlistentry>
 
     <varlistentry xml:id="mongodb-driver-query.constants.flag-partial">
      <term><constant>MongoDB\Driver\Query::FLAG_PARTIAL</constant></term>
      <listitem>
-      <para></para>
+      <para>Get partial results from mongos if some shards are down (instead of throwing an error).</para>
      </listitem>
     </varlistentry>
 
