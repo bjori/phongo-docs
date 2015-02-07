@@ -4,17 +4,18 @@
 <refentry xml:id="mongodb-driver-writebatch.count" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\WriteBatch::count</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Count expected roundtrips</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\WriteBatch::count</methodname>
+   <modifier>public</modifier> <type>int</type><methodname>MongoDB\Driver\WriteBatch::count</methodname>
    <void />
   </methodsynopsis>
   <para>
-
+   Returns how many sub-batches have been created so far, where each sub-batch
+   will result in one client&lt;-&gt;server roundtrip.
   </para>
 
  </refsect1>
@@ -27,47 +28,72 @@
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   
+   Returns number of sub-batches.
   </para>
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.argumentparsing;
+  </simplelist>
  </refsect1>
 
 
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\WriteBatch::count</function> example</title>
+   <title>Ordered batches are sent sequentially, broken up into sub-batches by group of operation type</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-
-/* ... */
-
+$batch = new MongoDB\Driver\WriteBatch(true);
+$batch->insert($a);
+$batch->insert($b);
+$batch->update($c, $obj);
+$batch->update($d, $obj);
+$batch->delete($e);
+$batch->delete($f);
+$batch->update($g, $obj);
+$batch->delete($h);
+var_dump(count($batch));
+?>
+]]>
+   </programlisting>
+   &example.outputs;
+   <screen>
+<![CDATA[
+int(5)
+]]>
+   </screen>
+  </example>
+  <example>
+   <title>Un-ordered batches may be sent in any order in parallel or serial</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+$batch = new MongoDB\Driver\WriteBatch(true);
+$batch->insert($a);
+$batch->insert($b);
+$batch->update($c, $obj);
+$batch->update($d, $obj);
+$batch->delete($e);
+$batch->delete($f);
+$batch->update($g, $obj);
+$batch->delete($h);
+var_dump(count($batch));
 ?>
 ]]>
    </programlisting>
    &example.outputs.similar;
    <screen>
 <![CDATA[
-...
+int(3)
 ]]>
    </screen>
   </example>
  </refsect1>
 
-
- <refsect1 role="seealso">
-  &reftitle.seealso;
-  <simplelist>
-   <member></member>
-  </simplelist>
- </refsect1>
 
 </refentry>
 

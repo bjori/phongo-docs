@@ -4,14 +4,14 @@
 <refentry xml:id="mongodb-driver-writebatch.delete" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\WriteBatch::delete</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Add a delete operation to the batch</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\WriteBatch::delete</methodname>
-   <methodparam><type>string</type><parameter>query</parameter></methodparam>
+   <modifier>public</modifier> <type>void</type><methodname>MongoDB\Driver\WriteBatch::delete</methodname>
+   <methodparam><type>array|object</type><parameter>filter</parameter></methodparam>
    <methodparam choice="opt"><type>array</type><parameter>deleteOptions</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -23,37 +23,23 @@
  <refsect1 role="parameters">
   &reftitle.parameters;
   <variablelist>
-   <varlistentry>
-    <term><parameter>query</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><parameter>deleteOptions</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
+   &phongo.parameter.filter;
+   &phongo.parameter.deleteOptions;
   </variablelist>
  </refsect1>
 
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   
+   &return.void;
   </para>
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.argumentparsing;
+  </simplelist>
  </refsect1>
 
 
@@ -65,17 +51,17 @@
 <![CDATA[
 <?php
 
-/* ... */
+$batch = new MongoDB\Driver\WriteBatch(true);
+$batch->delete(array("tag" => "phongo"), array("limit" => 1));
+$batch->delete(array("x" => "2"), array("limit" => 0));
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
 
 ?>
 ]]>
    </programlisting>
-   &example.outputs.similar;
-   <screen>
-<![CDATA[
-...
-]]>
-   </screen>
   </example>
  </refsect1>
 
@@ -83,7 +69,9 @@
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeDelete</methodname></member>
+   <member><classname>MongoDB\Driver\WriteResult</classname></member>
   </simplelist>
  </refsect1>
 

@@ -4,14 +4,14 @@
 <refentry xml:id="mongodb-driver-writebatch.insert" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\WriteBatch::insert</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Add a insert operation to the batch</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\WriteBatch::insert</methodname>
-   <methodparam><type>string</type><parameter>document</parameter></methodparam>
+   <modifier>public</modifier> <type>MongoDB\Driver\ObjectID</type><methodname>MongoDB\Driver\WriteBatch::insert</methodname>
+   <methodparam><type>array|object</type><parameter>document</parameter></methodparam>
   </methodsynopsis>
   <para>
 
@@ -26,7 +26,7 @@
     <term><parameter>document</parameter></term>
     <listitem>
      <para>
-      
+      A document to add to the insert batch.
      </para>
     </listitem>
    </varlistentry>
@@ -36,15 +36,17 @@
  <refsect1 role="returnvalues">
   &reftitle.returnvalues;
   <para>
-   
+   If the <parameter>document</parameter> did not have an _id, a
+   <classname>BSON\ObjectID</classname> will be generated and returned.
+   Otherwise no value is returned.
   </para>
  </refsect1>
 
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.argumentparsing;
+  </simplelist>
  </refsect1>
 
 
@@ -56,7 +58,26 @@
 <![CDATA[
 <?php
 
-/* ... */
+$batch = new MongoDB\Driver\WriteBatch(true);
+$document1 = array(
+    "title" => "Example#1",
+);
+$document2 = array(
+    "_id"   => "custom pregenerated ID",
+    "title" => "Example#1",
+);
+$document3 = array(
+     "_id"   => new BSON\ObjectID,
+    "title" => "Example#1",
+);
+$_id1 = $batch->insert($document1);
+$_id2 = $batch->insert($document2);
+$_id3 = $batch->insert($document3);
+var_dump($_id1, $_id2, $_id3);
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
 
 ?>
 ]]>
@@ -64,7 +85,12 @@
    &example.outputs.similar;
    <screen>
 <![CDATA[
-...
+object(BSON\ObjectID)#3 (1) {
+  ["oid"]=>
+  string(24) "54d51146bd21b91405401d92"
+}
+NULL
+NULL
 ]]>
    </screen>
   </example>
@@ -74,7 +100,11 @@
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeInsert</methodname></member>
+   <member><classname>MongoDB\Driver\WriteResult</classname></member>
+   <member><classname>BSON\ObjectID</classname></member>
+   <member><classname>BSON\Persistable</classname></member>
   </simplelist>
  </refsect1>
 

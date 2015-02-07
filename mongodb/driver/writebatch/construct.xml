@@ -4,17 +4,17 @@
 <refentry xml:id="mongodb-driver-writebatch.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\WriteBatch::__construct</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Create new WriteBatch</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
    <modifier>public</modifier> <methodname>MongoDB\Driver\WriteBatch::__construct</methodname>
-   <methodparam choice="opt"><type>string</type><parameter>ordered</parameter></methodparam>
+   <methodparam choice="opt"><type>boolean</type><parameter>ordered</parameter><initializer>true</initializer></methodparam>
   </methodsynopsis>
   <para>
-
+   Constructs a new ordered, or unordered <classname>MongoDB\Driver\WriteBatch</classname>.
   </para>
 
  </refsect1>
@@ -26,27 +26,21 @@
     <term><parameter>ordered</parameter></term>
     <listitem>
      <para>
-      
+      Ordered batches (&true;) are executed serially on the MongoDB server,
+      while unorderd batches (&false;) are sent to the server in arbitrary order
+      and may be executed in parallel.
      </para>
     </listitem>
    </varlistentry>
   </variablelist>
  </refsect1>
 
- <refsect1 role="returnvalues">
-  &reftitle.returnvalues;
-  <para>
-   
-  </para>
- </refsect1>
-
  <refsect1 role="errors">
   &reftitle.errors;
-  <para>
-   
-  </para>
+  <simplelist>
+   &phongo.throws.argumentparsing;
+  </simplelist>
  </refsect1>
-
 
  <refsect1 role="examples">
   &reftitle.examples;
@@ -56,15 +50,62 @@
 <![CDATA[
 <?php
 
-/* ... */
+$batch = new MongoDB\Driver\WriteBatch(true);
+$batch->insert($a);
+$batch->insert($b);
+$batch->update($c, $obj);
+$batch->update($d, $obj);
+$batch->delete($e);
+$batch->delete($f);
+$batch->update($g, $obj);
+$batch->delete($h);
 
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+try {
+    $result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+} catch(MongoDB\Driver\DuplicateKeyException $ex) {
+    $result = $ex->getWriteResult();
+    /* If the WriteConcern could not be fullfilled */
+    if ($writeConcernError = $result->getWriteConcernError()) {
+        printf("%s (%d): %s\n",
+            $writeConcernError->getMessage(),
+            $writeConcernError->getCode(),
+            var_export($writeConcernError->getInfo(), true)
+        );
+    }
+
+    /* If the write could not happen at all */
+    foreach ($result->getWriteErrors() as $writeError) {
+        printf("Operation#%d: %s (%d)\n",
+            $writeError->getIndex(),
+            $writeError->getMessage(),
+            $writeError->getCode()
+        );
+    }
+} catch(MongoDB\Driver\AuthenticationException $ex) {
+    printf("Cannot authenticate: %s\n", $ex->getMessage());
+    exit(1);
+} catch(MongoDB\Driver\ConnectionException $ex) {
+    printf("Cannot connect to MongoDB server: %s\n", $ex->getMessage());
+    exit(2);
+} catch(MongoDB\Driver\RuntimeException $ex) {
+    printf("Unknown error: %s\n", $ex->getMessage());
+    exit(3);
+}
+
+printf("Inserted %d document(s)\n", $result->getInsertedCount());
+printf("Updated  %d document(s)\n", $result->getModifiedCount());
+printf("Deleted  %d document(s)\n", $result->getDeletedCount());
 ?>
 ]]>
    </programlisting>
-   &example.outputs.similar;
+   &example.outputs;
    <screen>
 <![CDATA[
-...
+Inserted 2 document(s)
+Updated  3 document(s)
+Deleted  9 document(s)
 ]]>
    </screen>
   </example>
@@ -74,7 +115,8 @@
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member></member>
+   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><classname>MongoDB\Driver\WriteResult</classname></member>
   </simplelist>
  </refsect1>
 
