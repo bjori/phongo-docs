@@ -33,6 +33,7 @@
 
 <!-- {{{ Class synopsis -->
     <classsynopsisinfo>
+     <modifier>final</modifier>
      <ooclass>
       <classname>MongoDB\Driver\Manager</classname>
      </ooclass>

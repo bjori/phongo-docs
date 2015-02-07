@@ -28,48 +28,8 @@
   <variablelist>
    &phongo.parameter.namespace;
    &phongo.parameter.filter;
-   <varlistentry>
-    <term><parameter>newObj</parameter></term>
-    <listitem>
-     <para>
-      Either an array of update operators, or the full object to be replaced with
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><parameter>updateOptions</parameter></term>
-    <listitem>
-     <para>
-      <table>
-       <title>updateOptions</title>
-       <tgroup cols="4">
-        <thead>
-         <row>
-          <entry>Option</entry>
-          <entry>Type</entry>
-          <entry>Description</entry>
-          <entry>Default</entry>
-         </row>
-        </thead>
-        <tbody>
-         <row>
-          <entry>limit</entry>
-          <entry>boolean</entry>
-          <entry>Update only the first matching document (limit=1), or all matching documents (limit=0)</entry>
-          <entry>1</entry>
-         </row>
-         <row>
-          <entry>upsert</entry>
-          <entry>boolean</entry>
-          <entry>If <parameter>filter</parameter> does not match an existing document, insert the <parameter>newObj</parameter> as a new object, applying any atomic modifiers to the <parameter>filter</parameter> if applicable.</entry>
-          <entry>0</entry>
-         </row>
-        </tbody>
-       </tgroup>
-      </table>
-     </para>
-    </listitem>
-   </varlistentry>
+   &phongo.parameter.newObj;
+   &phongo.parameter.updateOptions;
    &phongo.parameter.writeConcern;
   </variablelist>
  </refsect1>
@@ -171,12 +131,12 @@ foreach ($result->getUpsertedIds() as $index => $id) {
 
 /* If the WriteConcern could not be fullfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
-    printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
+    printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }
 
 /* If the write could not happen at all */
 foreach ($result->getWriteErrors() as $writeError) {
-    printf("%s (%d)\n", $error->getMessage(), $error->getCode());
+    printf("%s (%d)\n", $writeError->getMessage(), $writeError->getCode());
 }
 ?>
 ]]>

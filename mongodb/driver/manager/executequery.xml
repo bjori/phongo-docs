@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executequery" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeQuery</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Execute a MongoDB Query</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -59,8 +59,6 @@
    <programlisting role="php">
 <![CDATA[
 <?php
-$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-
 $filter = array(
     "tag" => "phongo",
     "views" => array('$gt' => 5),
@@ -77,6 +75,7 @@ $options = array(
 $readPreference = new MongoDB\Driver\ReadPreference(MongoDB\Driver\ReadPreference::RP_PRIMARY);
 $query = new MongoDB\Driver\Query($filter, $options);
 
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $result = $manager->executeQuery("databaseName.collectionName", $query, $readPreference);
 
 foreach($result as $document) {

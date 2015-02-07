@@ -94,12 +94,12 @@ foreach ($result->getUpsertedIds() as $index => $id) {
 
 /* If the WriteConcern could not be fullfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
-    printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
+    printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }
 
 /* If a write could not happen at all */
 foreach ($result->getWriteErrors() as $writeError) {
-    printf("Operation#%d: %s (%d)\n", $error->getIndex(), $error->getMessage(), $error->getCode());
+    printf("Operation#%d: %s (%d)\n", $writeError->getIndex(), $writeError->getMessage(), $writeError->getCode());
 }
 ?>
 ]]>
