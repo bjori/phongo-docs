@@ -5,6 +5,10 @@ git clone git@github.com:bjori/phongo-docs.git doc-en/en/reference/phongo
 
 cd doc-en
 cat en/reference/phongo/language-snippets.ent >> en/language-snippets.ent
+## Open doc-base/manual.xml.in
+## Locate &reference.mongo.book;
+## Add "&reference.phongo.book;"  above it
+
 
 
 # Repeat these after each change
