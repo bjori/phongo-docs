@@ -13,7 +13,7 @@
    &reftitle.intro;
    <para>
     The <classname>MongoDB\Driver\Command</classname> class is a value object
-    encapsulating a MongoDB Command.
+    that represents a database command.
    </para>
    <para>
     To provide <quote>Command Helpers</quote> the <classname>MongoDB\Driver\Command</classname> object should be composed.
@@ -48,7 +48,7 @@
    &reftitle.examples;
 
    <example>
-    <title>Composing <classname>MongoDB\Driver\Command</classname> to provide helper to create collections</title>
+    <title>Composing <classname>MongoDB\Driver\Command</classname> to provide a helper to create collections</title>
     <programlisting role="php">
 <![CDATA[
 <?php
