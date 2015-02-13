@@ -8,26 +8,26 @@
  <info xml:id="info.phongo">
   <abstract>
    <simpara>
-    Phongo is an experimental MongoDB driver for PHP, likely replacing the
-    <xref linkend="book.mongo" /> driver in the near future.
+    Phongo is an experimental MongoDB driver for PHP, which will eventually
+    supersede the current <link linkend="book.mongo">mongo</link> extension.
    </simpara>
    <simpara>
-    Developed ontop of <link xlink:href="&url.phongo.mongoc;">libmongoc</link>
-    and <link xlink:href="&url.phongo.libbson;">libbson</link>, phongo is
-    meant to be as basic as possible.
+    Unlike the <link linkend="book.mongo">mongo</link> extension, phongo is
+    developed atop of <link xlink:href="&url.phongo.mongoc;">libmongoc</link>
+    and <link xlink:href="&url.phongo.libbson;">libbson</link> and provides a
+    minimal API for core driver functionality:
+    <link linkend="class.mongodb-driver-command">commands</link>,
+    <link linkend="class.mongodb-driver-query">queries</link>,
+    <link linkend="class.mongodb-driver-writebatch">writes</link>,
+    <link linkend="class.mongodb-driver-manager">connection management</link>
+    and <link linkend="book.bson">BSON serialization</link>.
    </simpara>
    <simpara>
-    Core MongoDB concepts are implemented, but everything else is left for
-    other toolkits to come in and provide pretty and flexible bindings that
-    make sense for their ecosystem.
-   </simpara>
-   <simpara>
-    This makes the driver exceptionally fast, and really easy to work with and
-    provide first class experience in your framework, library or application.
-   </simpara>
-   <simpara>
-    The plan is to provide an example bindings, which you may chose to use -
-    or ignore and make your own.
+    Userland PHP libraries that depend on phongo may provide higher level
+    APIs, such as query builders, individual command helper methods, and
+    GridFS. This separation of concerns will allow phongo to focus on
+    essential features for which an extension implementation is paramount for
+    performance.
    </simpara>
   </abstract>
  </info>
