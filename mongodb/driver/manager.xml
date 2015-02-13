@@ -14,10 +14,10 @@
    <para>
     The <classname>MongoDB\Driver\Manager</classname> is the main entry point
     to the extension. It is responsible for maintaining connections to MongoDB
-    (be it standalone server, replicaset or sharded).
+    (be it standalone server, replica set, or shard cluster).
    </para>
    <para>
-    No connection to MongoDB is made upon instanciating the Manager.
+    No connection to MongoDB is made upon instantiating the Manager.
     This means the <classname>MongoDB\Driver\Manager</classname> can always be
     constructed, even though one or more MongoDB servers are down.
    </para>
