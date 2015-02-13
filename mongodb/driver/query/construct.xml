@@ -42,7 +42,7 @@
          <row>
           <entry>limit</entry>
           <entry><type>integer</type></entry>
-          <entry>Client side maximum number of documents to return</entry>
+          <entry>The number of documents to be returned</entry>
          </row>
          <row>
           <entry>batchSize</entry>
@@ -67,12 +67,12 @@
          <row>
           <entry>modifiers</entry>
           <entry><type>array</type></entry>
-          <entry>Meta-operators modifying the output or behavior of a query</entry>
+          <entry>Meta operators modifying the output or behavior of a query</entry>
          </row>
          <row>
           <entry>projection</entry>
           <entry><type>array|object</type></entry>
-          <entry>Limits the fields to return for all matching documents</entry>
+          <entry>Specifies the fields to return using booleans or projection operators</entry>
          </row>
         </tbody>
        </tgroup>
