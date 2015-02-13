@@ -28,7 +28,7 @@
     <term><parameter>db</parameter></term>
     <listitem>
      <para>
-      The fully qualified database name to execute the command on.
+      The name of the database on which to execute the command.
      </para>
     </listitem>
    </varlistentry>
@@ -36,7 +36,7 @@
     <term><parameter>command</parameter></term>
     <listitem>
      <para>
-      The command object to execute
+      The command document.
      </para>
     </listitem>
    </varlistentry>
@@ -100,16 +100,15 @@ array(1) {
   &reftitle.notes;
   <note>
    <para>
-    <classname>MongoDB\Driver\WriteConcern</classname> is part of the
-    <parameter>command</parameter> document itself for commands that write.
+    For write commands, <classname>MongoDB\Driver\WriteConcern</classname> is
+    included in the <parameter>command</parameter> document itself.
    </para>
   </note>
   <note>
    <para>
-    It is the callers responsibility to verify if
-    <parameter>command</parameter> can be executed on a secondary, given a
-    secondary <parameter>readPreference</parameter>. No validation is done by
-    there driver.
+    If a secondary <parameter>readPreference</parameter> is used, it is the
+    caller's responsibility to ensure that the <parameter>command</parameter>
+    can be executed on a secondary. No validation is done by the driver.
    </para>
   </note>
  </refsect1>

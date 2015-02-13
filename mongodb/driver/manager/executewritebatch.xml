@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executewritebatch" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeWriteBatch</refname>
-  <refpurpose>Execute Write Operation(s)</refpurpose>
+  <refpurpose>Execute one or more write operations</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -20,9 +20,9 @@
   </para>
   <para>
    A <classname>MongoDB\Driver\WriteBatch</classname> can be constructed with
-   multiple different types of write operations (e.g. updates, deletes, and
-   inserts) in the same batch. The driver will attempt to send as many operations
-   to the server as it can at the same time, optimizing roundtrips.
+   multiple write operations of varying types (e.g. updates, deletes, and
+   inserts). The driver will attempt to send similarly type operations to the
+   server at the same time to optimize round trips.
   </para>
  </refsect1>
 
@@ -92,7 +92,7 @@ foreach ($result->getUpsertedIds() as $index => $id) {
     var_dump($id);
 }
 
-/* If the WriteConcern could not be fullfilled */
+/* If the WriteConcern could not be fulfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
     printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }
