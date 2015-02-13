@@ -12,8 +12,8 @@
   <section xml:id="mongodb-driver-query.intro">
    &reftitle.intro;
    <para>
-    The <classname>MongoDB\Driver\Query</classname> class is a value object
-    encapsulating a MongoDB Query.
+    The <classname>MongoDB\Driver\Query</classname> class is a value object that
+    represents a database query.
    </para>
   </section>
 <!-- }}} -->
@@ -94,9 +94,9 @@
   <section xml:id="mongodb-driver-query.constants">
    &reftitle.constants;
    <para>
-    These flags correspond to the MongoDB wire protocol. They may be bitwise
-    or'd together. They may modify how a query is performed in the MongoDB
-    server.
+    These bit flags correspond to the MongoDB wire protocol for an OP_QUERY
+    message and control how a query is executed on the server. Flags may be
+    combined with bitwise operators.
    </para>
    <variablelist>
 
