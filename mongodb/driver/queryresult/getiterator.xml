@@ -4,17 +4,17 @@
 <refentry xml:id="mongodb-driver-queryresult.getiterator" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\QueryResult::getIterator</refname>
-  <refpurpose>Description</refpurpose>
+  <refpurpose>Retrieve instance of the Iterator</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\QueryResult::getIterator</methodname>
+   <modifier>final</modifier> <modifier>public</modifier> <type>Iterator</type><methodname>MongoDB\Driver\QueryResult::getIterator</methodname>
    <void />
   </methodsynopsis>
   <para>
-
+   Returns the Iterator for this Query
   </para>
 
  </refsect1>

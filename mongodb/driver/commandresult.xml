@@ -12,6 +12,14 @@
   <section xml:id="mongodb-driver-commandresult.intro">
    &reftitle.intro;
    <para>
+    The <classname>MongoDB\Driver\CommandResult</classname> class encapsulates
+    the results of a MongoDB Command, returned by
+    <methodname>MongoDB\Driver\Manager::executeCommand</methodname>.
+   </para>
+   <para>
+
+   </para>
+   <para>
 
    </para>
   </section>

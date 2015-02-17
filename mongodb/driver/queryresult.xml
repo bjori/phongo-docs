@@ -12,7 +12,9 @@
   <section xml:id="mongodb-driver-queryresult.intro">
    &reftitle.intro;
    <para>
-
+    <classname>MongoDB\Driver\QueryResult</classname> encapsulates MongoDB
+    Query Results and is returned by
+    <methodname>MongoDB\Driver\Manager::executeQuery</methodname>
    </para>
   </section>
 <!-- }}} -->
