@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executedelete" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeDelete</refname>
-  <refpurpose>Convenience method for single delete operation</refpurpose>
+  <refpurpose>Convenience method for a single delete operation</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -66,7 +66,7 @@ $result = $manager->executeDelete("mydb.collection", $filter, $deleteOptions, $w
 
 printf("Deleted %d document(s)\n", $result->getDeletedCount());
 
-/* If the WriteConcern could not be fullfilled */
+/* If the WriteConcern could not be fulfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
     printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }
@@ -91,7 +91,7 @@ Deleted 1 document(s)
   &reftitle.notes;
   <caution>
    <para>
-    A single delete operations <emphasis>can</emphasis> delete more then one document.
+    A single delete operation <emphasis>may</emphasis> delete more then one document.
    </para>
    <para>
     The optional <parameter>limit</parameter>

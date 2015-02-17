@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executeinsert" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeInsert</refname>
-  <refpurpose>Convenience method for single insert operation</refpurpose>
+  <refpurpose>Convenience method for a single insert operation</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -29,7 +29,7 @@
     <term><parameter>document</parameter></term>
     <listitem>
      <para>
-      The document to insert
+      The document to insert.
      </para>
     </listitem>
    </varlistentry>
@@ -67,7 +67,7 @@ $result = $manager->executeInsert("mydb.collection", $document, $writeConcern);
 
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 
-/* If the WriteConcern could not be fullfilled */
+/* If the WriteConcern could not be fulfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
     printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }

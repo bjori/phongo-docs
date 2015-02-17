@@ -4,7 +4,7 @@
 <refentry xml:id="mongodb-driver-manager.executeupdate" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
   <refname>MongoDB\Driver\Manager::executeUpdate</refname>
-  <refpurpose>Convenience method for single update operation</refpurpose>
+  <refpurpose>Convenience method for a single update operation</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
@@ -78,7 +78,7 @@ foreach ($result->getUpsertedIds() as $index => $id) {
     var_dump($id);
 }
 
-/* If the WriteConcern could not be fullfilled */
+/* If the WriteConcern could not be fulfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
     printf("%s (%d): %s\n", $error->getMessage(), $error->getCode(), var_export($error->getInfo(), true));
 }
@@ -114,7 +114,7 @@ $document = array(
 );
 $updateOptions = array(
     "limit" => 0,
-    "upsert" => 1,
+    "upsert" => true,
 );
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
 
@@ -129,7 +129,7 @@ foreach ($result->getUpsertedIds() as $index => $id) {
     var_dump($id);
 }
 
-/* If the WriteConcern could not be fullfilled */
+/* If the WriteConcern could not be fulfilled */
 if ($writeConcernError = $result->getWriteConcernError()) {
     printf("%s (%d): %s\n", $writeConcernError->getMessage(), $writeConcernError->getCode(), var_export($writeConcernError->getInfo(), true));
 }

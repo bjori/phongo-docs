@@ -16,7 +16,7 @@
    <methodparam choice="opt"><type>array</type><parameter>driverOptions</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Constructs a new <classname>MongoDB\Driver\Manager</classname> object with the provided settings.
+   Constructs a new <classname>MongoDB\Driver\Manager</classname> object with the specified options.
   </para>
 
  </refsect1>
@@ -41,13 +41,13 @@ mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][
     <term><parameter>options</parameter></term>
     <listitem>
      <para>
-      A <link xlink:href="&url.mongodb.docs;reference/connection-string/#connections-connection-options">mongodb://</link> connection options.
+      <link xlink:href="&url.mongodb.docs;reference/connection-string/#connections-connection-options">Connection string options</link>.
      </para>
      <note>
       <para>
-       Passing options through using the <parameter>options</parameter> argument
-       will overwrite the same option set using the
-       <parameter>uri</parameter>.
+       Specifying options via the <parameter>options</parameter> argument will
+       overwrite any options with the same name in the
+       <parameter>uri</parameter> argument.
       </para>
      </note>
     </listitem>
@@ -56,7 +56,7 @@ mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][
     <term><parameter>driverOptions</parameter></term>
     <listitem>
      <para>
-      Any Driver specific options not included in MongoDB connection spec.
+      Any driver-specific options not included in MongoDB connection spec.
      </para>
     </listitem>
    </varlistentry>
@@ -85,27 +85,27 @@ $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 ?>
 ]]>
    </programlisting>
-   <para>Connecting to a Replica Set</para>
+   <para>Connecting to a replica set</para>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017/?replicaSet=my-replica");
+$manager = new MongoDB\Driver\Manager("mongodb://rs1.example.com,rs2.example.com/?replicaSet=myReplicaSet");
 
 ?>
 ]]>
    </programlisting>
-   <para>Connecting to a sharded MongoDB (e.g. mongos)</para>
+   <para>Connecting to a sharded cluster (i.e. one or more mongos instances)</para>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$manager = new MongoDB\Driver\Manager("mongodb://localhost:27018/");
+$manager = new MongoDB\Driver\Manager("mongodb://mongos1.example.com,mongos2.example.com/");
 
 ?>
 ]]>
    </programlisting>
-   <para>Connecting to MongoDB using username &amp; password</para>
+   <para>Connecting to MongoDB with authentication credentials for a particular user and database.</para>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -123,6 +123,7 @@ $manager = new MongoDB\Driver\Manager("mongodb://myusername:mypassword@localhost
   <simplelist>
    <member><methodname>MongoDB\Driver\Server::__construct</methodname></member>
    <member><xref linkend="phongo.tutorial.connecting" /></member>
+   <member><link xlink:href="&url.mongodb.docs;reference/connection-string/">Connection string URI format</link></member>
   </simplelist>
  </refsect1>
 
