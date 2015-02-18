@@ -15,13 +15,14 @@
  <function name='mongodb\driver\command' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\command::__construct' from='phongo &gt;=0.4.0'/>
 
- <function name='mongodb\driver\commandresult' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::__construct' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::getiterator' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::setiteratorclass' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::setiteratorinitcallback' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::getresponsedocument' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\commandresult::getserver' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::__construct' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::settypemap' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::getiterator' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::setiteratorclass' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::setiteratorinitcallback' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::toarray' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\result::getserver' from='phongo &gt;=0.4.0'/>
 
  <function name='mongodb\driver\cursor' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\cursor::__construct' from='phongo &gt;=0.4.0'/>
@@ -53,14 +54,6 @@
 
  <function name='mongodb\driver\query' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\query::__construct' from='phongo &gt;=0.4.0'/>
-
- <function name='mongodb\driver\queryresult' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::settypemap' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::__construct' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::getiterator' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::setiteratorclass' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::setiteratorinitcallback' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\queryresult::getserver' from='phongo &gt;=0.4.0'/>
 
  <function name='mongodb\driver\readpreference' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\readpreference::__construct' from='phongo &gt;=0.4.0'/>

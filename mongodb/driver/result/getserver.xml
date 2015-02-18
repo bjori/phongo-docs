@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-queryresult.settypemap" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-result.getserver" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\QueryResult::setTypemap</refname>
+  <refname>MongoDB\Driver\Result::getServer</refname>
   <refpurpose>Description</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\QueryResult::setTypemap</methodname>
-   <methodparam><type>array</type><parameter>typemap</parameter></methodparam>
+   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\Result::getServer</methodname>
+   <void />
   </methodsynopsis>
   <para>
 
@@ -21,16 +21,7 @@
 
  <refsect1 role="parameters">
   &reftitle.parameters;
-  <variablelist>
-   <varlistentry>
-    <term><parameter>typemap</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
-  </variablelist>
+  &no.function.parameters;
  </refsect1>
 
  <refsect1 role="returnvalues">
@@ -51,7 +42,7 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\QueryResult::setTypemap</function> example</title>
+   <title><function>MongoDB\Driver\Result::getServer</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php

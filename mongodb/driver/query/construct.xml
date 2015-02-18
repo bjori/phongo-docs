@@ -134,7 +134,7 @@ foreach($result as $document) {
   &reftitle.seealso;
   <simplelist>
    <member><methodname>MongoDB\Driver\Manager::executeQuery</methodname></member>
-   <member><classname>MongoDB\Driver\QueryResult</classname></member>
+   <member><classname>MongoDB\Driver\Result</classname></member>
    <member><link xlink:href="&url.mongodb.docs;reference/operator/query-modifier/#modifiers">MongoDB Query Modifiers</link></member>
   </simplelist>
  </refsect1>

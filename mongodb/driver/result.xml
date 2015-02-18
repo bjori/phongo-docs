@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<phpdoc:classref xml:id="class.mongodb-driver-commandresult" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
+<phpdoc:classref xml:id="class.mongodb-driver-result" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
 
- <title>The MongoDB\Driver\CommandResult class</title>
- <titleabbrev>MongoDB\Driver\CommandResult</titleabbrev>
+ <title>The MongoDB\Driver\Result class</title>
+ <titleabbrev>MongoDB\Driver\Result</titleabbrev>
 
  <partintro>
 
-<!-- {{{ MongoDB\Driver\CommandResult intro -->
-  <section xml:id="mongodb-driver-commandresult.intro">
+<!-- {{{ MongoDB\Driver\Result intro -->
+  <section xml:id="mongodb-driver-result.intro">
    &reftitle.intro;
    <para>
-    The <classname>MongoDB\Driver\CommandResult</classname> class encapsulates
+    The <classname>MongoDB\Driver\Result</classname> class encapsulates
     the results of a MongoDB Command, returned by
     <methodname>MongoDB\Driver\Manager::executeCommand</methodname>.
    </para>
@@ -25,18 +25,18 @@
   </section>
 <!-- }}} -->
 
-  <section xml:id="mongodb-driver-commandresult.synopsis">
+  <section xml:id="mongodb-driver-result.synopsis">
    &reftitle.classsynopsis;
 
 <!-- {{{ Synopsis -->
    <classsynopsis>
-    <ooclass><classname>MongoDB\Driver\CommandResult</classname></ooclass>
+    <ooclass><classname>MongoDB\Driver\Result</classname></ooclass>
 
 <!-- {{{ Class synopsis -->
     <classsynopsisinfo>
      <modifier>final</modifier>
      <ooclass>
-      <classname>MongoDB\Driver\CommandResult</classname>
+      <classname>MongoDB\Driver\Result</classname>
      </ooclass>
      
      <oointerface>
@@ -46,7 +46,7 @@
 <!-- }}} -->
     
     <classsynopsisinfo role="comment">&Methods;</classsynopsisinfo>
-    <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('class.mongodb-driver-commandresult')/db:refentry/db:refsect1[@role='description']/descendant::db:methodsynopsis[not(@role='procedural')])" />
+    <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('class.mongodb-driver-result')/db:refentry/db:refsect1[@role='description']/descendant::db:methodsynopsis[not(@role='procedural')])" />
    </classsynopsis>
 <!-- }}} -->
 
@@ -54,7 +54,7 @@
 
  </partintro>
 
- &reference.phongo.mongodb.driver.entities.commandresult;
+ &reference.phongo.mongodb.driver.entities.result;
 
 </phpdoc:classref>
 

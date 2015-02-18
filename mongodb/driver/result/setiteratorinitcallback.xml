@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-commandresult.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-result.setiteratorinitcallback" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\CommandResult::__construct</refname>
+  <refname>MongoDB\Driver\Result::setIteratorInitCallback</refname>
   <refpurpose>Description</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <methodname>MongoDB\Driver\CommandResult::__construct</methodname>
-   <methodparam><type>Server</type><parameter>server</parameter></methodparam>
-   <methodparam><type>string</type><parameter>responseDocument</parameter></methodparam>
+   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\Result::setIteratorInitCallback</methodname>
+   <methodparam><type>string</type><parameter>callback</parameter></methodparam>
   </methodsynopsis>
   <para>
 
@@ -24,15 +23,7 @@
   &reftitle.parameters;
   <variablelist>
    <varlistentry>
-    <term><parameter>server</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
-   <varlistentry>
-    <term><parameter>responseDocument</parameter></term>
+    <term><parameter>callback</parameter></term>
     <listitem>
      <para>
       
@@ -60,7 +51,7 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\CommandResult::__construct</function> example</title>
+   <title><function>MongoDB\Driver\Result::setIteratorInitCallback</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php

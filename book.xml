@@ -58,8 +58,7 @@
   &reference.phongo.mongodb.driver.query;
   &reference.phongo.mongodb.driver.writebatch;
 
-  &reference.phongo.mongodb.driver.commandresult;
-  &reference.phongo.mongodb.driver.queryresult;
+  &reference.phongo.mongodb.driver.result;
 
   &reference.phongo.mongodb.driver.writeconcern;
   &reference.phongo.mongodb.driver.readpreference;

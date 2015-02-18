@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-commandresult.setiteratorclass" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-result.getiterator" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\CommandResult::setIteratorClass</refname>
+  <refname>MongoDB\Driver\Result::getIterator</refname>
   <refpurpose>Description</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\CommandResult::setIteratorClass</methodname>
-   <methodparam><type>string</type><parameter>class</parameter></methodparam>
+   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\Result::getIterator</methodname>
+   <void />
   </methodsynopsis>
   <para>
 
@@ -21,16 +21,7 @@
 
  <refsect1 role="parameters">
   &reftitle.parameters;
-  <variablelist>
-   <varlistentry>
-    <term><parameter>class</parameter></term>
-    <listitem>
-     <para>
-      
-     </para>
-    </listitem>
-   </varlistentry>
-  </variablelist>
+  &no.function.parameters;
  </refsect1>
 
  <refsect1 role="returnvalues">
@@ -51,7 +42,7 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\CommandResult::setIteratorClass</function> example</title>
+   <title><function>MongoDB\Driver\Result::getIterator</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
