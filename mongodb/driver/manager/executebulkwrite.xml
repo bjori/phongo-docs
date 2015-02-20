@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-manager.executewritebatch" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-manager.executewritebulk" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\Manager::executeWriteBatch</refname>
+  <refname>MongoDB\Driver\Manager::executeBulkWrite</refname>
   <refpurpose>Execute one or more write operations</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname>
+   <modifier>final</modifier> <modifier>public</modifier> <type>MongoDB\Driver\WriteResult</type><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname>
    <methodparam><type>string</type><parameter>namespace</parameter></methodparam>
-   <methodparam><type>MongoDB\Driver\WriteBatch</type><parameter>batch</parameter></methodparam>
+   <methodparam><type>MongoDB\Driver\BulkWrite</type><parameter>bulk</parameter></methodparam>
    <methodparam choice="opt"><type>MongoDB\Driver\WriteConcern</type><parameter>writeConcern</parameter></methodparam>
   </methodsynopsis>
   <para>
    Executes one or more write operations.
   </para>
   <para>
-   A <classname>MongoDB\Driver\WriteBatch</classname> can be constructed with
+   A <classname>MongoDB\Driver\BulkWrite</classname> can be constructed with
    multiple write operations of varying types (e.g. updates, deletes, and
    inserts). The driver will attempt to send similarly type operations to the
    server at the same time to optimize round trips.
@@ -31,10 +31,10 @@
   <variablelist>
    &phongo.parameter.namespace;
    <varlistentry>
-    <term><parameter>batch</parameter></term>
+    <term><parameter>bulk</parameter></term>
     <listitem>
      <para>
-      The <classname>MongoDB\Driver\WriteBatch</classname> to execute.
+      The <classname>MongoDB\Driver\BulkWrite</classname> to execute.
      </para>
     </listitem>
    </varlistentry>
@@ -59,27 +59,27 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\Manager::executeWriteBatch</function> example</title>
+   <title><function>MongoDB\Driver\Manager::executeBulkWrite</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-$batch = new MongoDB\Driver\WriteBatch();
+$bulk = new MongoDB\Driver\BulkWrite();
 
-$batch->insert(array("_id" => 1, "x" => 1));
-$batch->insert(array("_id" => 2, "x" => 2));
+$bulk->insert(array("_id" => 1, "x" => 1));
+$bulk->insert(array("_id" => 2, "x" => 2));
 
-$batch->update(array(  "x" => 2), array('$set' => array("x" => 1)), array("limit" => 1, "upsert" => false));
-$batch->update(array(  "x" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
-$batch->update(array("_id" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
+$bulk->update(array(  "x" => 2), array('$set' => array("x" => 1)), array("limit" => 1, "upsert" => false));
+$bulk->update(array(  "x" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
+$bulk->update(array("_id" => 3), array('$set' => array("x" => 3)), array("limit" => 1, "upsert" => true));
 
-$batch->insert(array("_id" => 4, "x" => 2));
+$bulk->insert(array("_id" => 4, "x" => 2));
 
-$batch->delete(array("x" => 1), array("limit" => 1));
+$bulk->delete(array("x" => 1), array("limit" => 1));
 
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 100);
-$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+$result = $manager->executeBulkWrite("databaseName.collectionName", $bulk, $writeConcern);
 
 printf("Inserted %d document(s)\n", $result->getInsertedCount());
 printf("Matched  %d document(s)\n", $result->getMatchedCount());
@@ -125,7 +125,7 @@ upsertedId[4]: int(3)
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><classname>MongoDB\Driver\WriteBatch</classname></member>
+   <member><classname>MongoDB\Driver\BulkWrite</classname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
    <member><classname>MongoDB\Driver\WriteConcern</classname></member>
   </simplelist>

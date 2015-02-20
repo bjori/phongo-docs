@@ -140,7 +140,7 @@ Optionally, a <classname>MongoDB\Driver\WriteConcern</classname>. If none given,
     <methodname>MongoDB\Driver\WriteResult::getWriteErrors</methodname> will
     only ever have one <classname>MongoDB\Driver\WriteError</classname> in the
     array, and <methodname>MongoDB\Driver\WriteError::getIndex</methodname>
-    will always be 0 (the index of this operation in the batch).
+    will always be 0 (the index of this operation in the bulk).
    </para>
   </note>
 '> 
@@ -149,7 +149,7 @@ Optionally, a <classname>MongoDB\Driver\WriteConcern</classname>. If none given,
    <para>
     <methodname>MongoDB\Driver\WriteResult::getUpsertedIds</methodname> will
     only ever have one <classname>BSON\ObjectID</classname> in the 
-    array, and the index always be 0 (the index of this operation in the batch).
+    array, and the index always be 0 (the index of this operation in the bulk).
    </para>
   </note>
 '> 

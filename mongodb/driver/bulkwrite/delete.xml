@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-writebatch.delete" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-writebulk.delete" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\WriteBatch::delete</refname>
-  <refpurpose>Add a delete operation to the batch</refpurpose>
+  <refname>MongoDB\Driver\BulkWrite::delete</refname>
+  <refpurpose>Add a delete operation to the bulk</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>void</type><methodname>MongoDB\Driver\WriteBatch::delete</methodname>
+   <modifier>public</modifier> <type>void</type><methodname>MongoDB\Driver\BulkWrite::delete</methodname>
    <methodparam><type>array|object</type><parameter>filter</parameter></methodparam>
    <methodparam choice="opt"><type>array</type><parameter>deleteOptions</parameter></methodparam>
   </methodsynopsis>
@@ -46,18 +46,18 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\WriteBatch::delete</function> example</title>
+   <title><function>MongoDB\Driver\BulkWrite::delete</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$batch = new MongoDB\Driver\WriteBatch(true);
-$batch->delete(array("tag" => "phongo"), array("limit" => 1));
-$batch->delete(array("x" => "2"), array("limit" => 0));
+$bulk = new MongoDB\Driver\BulkWrite(true);
+$bulk->delete(array("tag" => "phongo"), array("limit" => 1));
+$bulk->delete(array("x" => "2"), array("limit" => 0));
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+$result = $manager->executeBulkWrite("databaseName.collectionName", $bulk, $writeConcern);
 
 ?>
 ]]>
@@ -69,7 +69,7 @@ $result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $wr
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname></member>
    <member><methodname>MongoDB\Driver\Manager::executeDelete</methodname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
   </simplelist>

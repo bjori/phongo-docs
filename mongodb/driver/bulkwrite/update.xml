@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-writebatch.update" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-writebulk.update" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\WriteBatch::update</refname>
-  <refpurpose>Add an update operation to the batch</refpurpose>
+  <refname>MongoDB\Driver\BulkWrite::update</refname>
+  <refpurpose>Add an update operation to the bulk</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>void</type><methodname>MongoDB\Driver\WriteBatch::update</methodname>
+   <modifier>public</modifier> <type>void</type><methodname>MongoDB\Driver\BulkWrite::update</methodname>
    <methodparam><type>array|object</type><parameter>filter</parameter></methodparam>
    <methodparam><type>array|object</type><parameter>newObj</parameter></methodparam>
    <methodparam choice="opt"><type>array</type><parameter>updateOptions</parameter></methodparam>
@@ -48,18 +48,18 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\WriteBatch::update</function> example</title>
+   <title><function>MongoDB\Driver\BulkWrite::update</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$batch = new MongoDB\Driver\WriteBatch(true);
-$batch->update(array("tag" => "phongo"), array("limit" => 1));
-$batch->update(array(  "x" => "2"     ), array("y" => 3, '$set' => array("z" => 4)), array("upsert" => 0));
+$bulk = new MongoDB\Driver\BulkWrite(true);
+$bulk->update(array("tag" => "phongo"), array("limit" => 1));
+$bulk->update(array(  "x" => "2"     ), array("y" => 3, '$set' => array("z" => 4)), array("upsert" => 0));
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+$result = $manager->executeBulkWrite("databaseName.collectionName", $bulk, $writeConcern);
 
 ?>
 ]]>
@@ -71,7 +71,7 @@ $result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $wr
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname></member>
    <member><methodname>MongoDB\Driver\Manager::executeUpdate</methodname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
   </simplelist>

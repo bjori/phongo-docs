@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-writebatch.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-writebulk.construct" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\WriteBatch::__construct</refname>
-  <refpurpose>Create new WriteBatch</refpurpose>
+  <refname>MongoDB\Driver\BulkWrite::__construct</refname>
+  <refpurpose>Create new BulkWrite</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <methodname>MongoDB\Driver\WriteBatch::__construct</methodname>
+   <modifier>public</modifier> <methodname>MongoDB\Driver\BulkWrite::__construct</methodname>
    <methodparam choice="opt"><type>boolean</type><parameter>ordered</parameter><initializer>true</initializer></methodparam>
   </methodsynopsis>
   <para>
-   Constructs a new ordered, or unordered <classname>MongoDB\Driver\WriteBatch</classname>.
+   Constructs a new ordered, or unordered <classname>MongoDB\Driver\BulkWrite</classname>.
   </para>
 
  </refsect1>
@@ -26,8 +26,8 @@
     <term><parameter>ordered</parameter></term>
     <listitem>
      <para>
-      Ordered batches (&true;) are executed serially on the MongoDB server,
-      while unorderd batches (&false;) are sent to the server in arbitrary order
+      Ordered bulkes (&true;) are executed serially on the MongoDB server,
+      while unorderd bulkes (&false;) are sent to the server in arbitrary order
       and may be executed in parallel.
      </para>
     </listitem>
@@ -45,25 +45,25 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\WriteBatch::__construct</function> example</title>
+   <title><function>MongoDB\Driver\BulkWrite::__construct</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$batch = new MongoDB\Driver\WriteBatch(true);
-$batch->insert($a);
-$batch->insert($b);
-$batch->update($c, $obj);
-$batch->update($d, $obj);
-$batch->delete($e);
-$batch->delete($f);
-$batch->update($g, $obj);
-$batch->delete($h);
+$bulk = new MongoDB\Driver\BulkWrite(true);
+$bulk->insert($a);
+$bulk->insert($b);
+$bulk->update($c, $obj);
+$bulk->update($d, $obj);
+$bulk->delete($e);
+$bulk->delete($f);
+$bulk->update($g, $obj);
+$bulk->delete($h);
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 try {
-    $result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+    $result = $manager->executeBulkWrite("databaseName.collectionName", $bulk, $writeConcern);
 } catch(MongoDB\Driver\DuplicateKeyException $ex) {
     $result = $ex->getWriteResult();
     /* If the WriteConcern could not be fullfilled */
@@ -115,7 +115,7 @@ Deleted  9 document(s)
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
   </simplelist>
  </refsect1>

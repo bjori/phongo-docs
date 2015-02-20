@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-server.executewritebatch" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-server.executebulkwrite" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\Server::executeWriteBatch</refname>
+  <refname>MongoDB\Driver\Server::executeBulkWrite</refname>
   <refpurpose>Description</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\Server::executeWriteBatch</methodname>
+   <modifier>final</modifier> <modifier>public</modifier> <type>ReturnType</type><methodname>MongoDB\Driver\Server::executeBulkWrite</methodname>
    <methodparam><type>string</type><parameter>namespace</parameter></methodparam>
-   <methodparam><type>WriteBatch</type><parameter>zbatch</parameter></methodparam>
+   <methodparam><type>BulkWrite</type><parameter>zwrite</parameter></methodparam>
   </methodsynopsis>
   <para>
 
@@ -32,7 +32,7 @@
     </listitem>
    </varlistentry>
    <varlistentry>
-    <term><parameter>zbatch</parameter></term>
+    <term><parameter>zwrite</parameter></term>
     <listitem>
      <para>
       
@@ -60,7 +60,7 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\Server::executeWriteBatch</function> example</title>
+   <title><function>MongoDB\Driver\Server::executeBulkWrite</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php

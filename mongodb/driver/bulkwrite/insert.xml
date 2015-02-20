@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<refentry xml:id="mongodb-driver-writebatch.insert" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="mongodb-driver-writebulk.insert" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
  <refnamediv>
-  <refname>MongoDB\Driver\WriteBatch::insert</refname>
-  <refpurpose>Add a insert operation to the batch</refpurpose>
+  <refname>MongoDB\Driver\BulkWrite::insert</refname>
+  <refpurpose>Add a insert operation to the bulk</refpurpose>
  </refnamediv>
 
  <refsect1 role="description">
   &reftitle.description;
   <methodsynopsis>
-   <modifier>public</modifier> <type>MongoDB\Driver\ObjectID</type><methodname>MongoDB\Driver\WriteBatch::insert</methodname>
+   <modifier>public</modifier> <type>MongoDB\Driver\ObjectID</type><methodname>MongoDB\Driver\BulkWrite::insert</methodname>
    <methodparam><type>array|object</type><parameter>document</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -26,7 +26,7 @@
     <term><parameter>document</parameter></term>
     <listitem>
      <para>
-      A document to add to the insert batch.
+      A document to add to the insert bulk.
      </para>
     </listitem>
    </varlistentry>
@@ -53,12 +53,12 @@
  <refsect1 role="examples">
   &reftitle.examples;
   <example>
-   <title><function>MongoDB\Driver\WriteBatch::insert</function> example</title>
+   <title><function>MongoDB\Driver\BulkWrite::insert</function> example</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-$batch = new MongoDB\Driver\WriteBatch(true);
+$bulk = new MongoDB\Driver\BulkWrite(true);
 $document1 = array(
     "title" => "Example#1",
 );
@@ -70,14 +70,14 @@ $document3 = array(
      "_id"   => new BSON\ObjectID,
     "title" => "Example#1",
 );
-$_id1 = $batch->insert($document1);
-$_id2 = $batch->insert($document2);
-$_id3 = $batch->insert($document3);
+$_id1 = $bulk->insert($document1);
+$_id2 = $bulk->insert($document2);
+$_id3 = $bulk->insert($document3);
 var_dump($_id1, $_id2, $_id3);
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-$result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+$result = $manager->executeBulkWrite("databaseName.collectionName", $bulk, $writeConcern);
 
 ?>
 ]]>
@@ -100,7 +100,7 @@ NULL
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+   <member><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname></member>
    <member><methodname>MongoDB\Driver\Manager::executeInsert</methodname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
    <member><classname>BSON\ObjectID</classname></member>

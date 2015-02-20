@@ -46,7 +46,7 @@
  <function name='mongodb\driver\manager::__construct' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\manager::executecommand' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\manager::executequery' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\manager::executewritebatch' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\manager::executebulkwrite' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\manager::executeinsert' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\manager::executeupdate' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\manager::executedelete' from='phongo &gt;=0.4.0'/>
@@ -62,7 +62,7 @@
  <function name='mongodb\driver\server::__construct' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::executecommand' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::executequery' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\server::executewritebatch' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\server::executebulkwrite' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::gethost' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::getinfo' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::getlatency' from='phongo &gt;=0.4.0'/>
@@ -72,12 +72,12 @@
  <function name='mongodb\driver\server::isdelayed' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\server::ispassive' from='phongo &gt;=0.4.0'/>
 
- <function name='mongodb\driver\writebatch' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\writebatch::__construct' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\writebatch::insert' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\writebatch::update' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\writebatch::delete' from='phongo &gt;=0.4.0'/>
- <function name='mongodb\driver\writebatch::count' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite::__construct' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite::insert' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite::update' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite::delete' from='phongo &gt;=0.4.0'/>
+ <function name='mongodb\driver\bulkwrite::count' from='phongo &gt;=0.4.0'/>
 
  <function name='mongodb\driver\writeconcern' from='phongo &gt;=0.4.0'/>
  <function name='mongodb\driver\writeconcern::__construct' from='phongo &gt;=0.4.0'/>

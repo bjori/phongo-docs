@@ -17,7 +17,7 @@
    <methodparam choice="opt"><type>MongoDB\Driver\WriteConcern</type><parameter>writeConcern</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Convenience method to execute a <classname>MongoDB\Driver\WriteBatch</classname> with only one delete operation.
+   Convenience method to execute a <classname>MongoDB\Driver\BulkWrite</classname> with only one delete operation.
   </para>
  </refsect1>
 
@@ -105,7 +105,7 @@ Deleted 1 document(s)
  <refsect1 role="seealso">
   &reftitle.seealso;
   <simplelist>
-   <member><methodname>MongoDB\Driver\WriteBatch::delete</methodname></member>
+   <member><methodname>MongoDB\Driver\BulkWrite::delete</methodname></member>
    <member><classname>MongoDB\Driver\WriteResult</classname></member>
    <member><classname>MongoDB\Driver\WriteConcern</classname></member>
   </simplelist>

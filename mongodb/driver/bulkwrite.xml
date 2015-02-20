@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Revision$ -->
 
-<phpdoc:classref xml:id="class.mongodb-driver-writebatch" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
+<phpdoc:classref xml:id="class.mongodb-driver-bulkwrite" xmlns:phpdoc="http://php.net/ns/phpdoc" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude">
 
- <title>The MongoDB\Driver\WriteBatch class</title>
- <titleabbrev>MongoDB\Driver\WriteBatch</titleabbrev>
+ <title>The MongoDB\Driver\BulkWrite class</title>
+ <titleabbrev>MongoDB\Driver\BulkWrite</titleabbrev>
 
  <partintro>
 
-<!-- {{{ MongoDB\Driver\WriteBatch intro -->
-  <section xml:id="mongodb-driver-writebatch.intro">
+<!-- {{{ MongoDB\Driver\BulkWrite intro -->
+  <section xml:id="mongodb-driver-bulkwrite.intro">
    &reftitle.intro;
    <para>
-    The <classname>MongoDB\Driver\WriteBatch</classname> collects one ore more write
-    operations that should be sent to the server in batches.
+    The <classname>MongoDB\Driver\BulkWrite</classname> collects one ore more write
+    operations that should be sent to the server in writees.
    </para>
    <para>
-    The <classname>MongoDB\Driver\Manager</classname> has 3 wrapper methods for single-item batches for simplicity:
+    The <classname>MongoDB\Driver\Manager</classname> has 3 wrapper methods for single-item writees for simplicity:
     <simplelist>
      <member><methodname>MongoDB\Driver\Manager::executeInsert</methodname></member>
      <member><methodname>MongoDB\Driver\Manager::executeDelete</methodname></member>
      <member><methodname>MongoDB\Driver\Manager::executeUpdate</methodname></member>
     </simplelist>
-    along with the main method to execute a batch: <methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname>
+    along with the main method to execute a write: <methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname>
    </para>
    <para>
-    When constructing a batch, you must define if the batch should be executed
+    When constructing a write, you must define if the write should be executed
     in order (default), or if it can be reordered by the server.
    </para>
    <para>
-    Ordered batch write operations are sent to the server, in the order
+    Ordered write write operations are sent to the server, in the order
     provided, for serial execution. If a write fails, any remaining operations
     will be aborted.
    </para>
@@ -41,18 +41,18 @@
   </section>
 <!-- }}} -->
 
-  <section xml:id="mongodb-driver-writebatch.synopsis">
+  <section xml:id="mongodb-driver-bulkwrite.synopsis">
    &reftitle.classsynopsis;
 
 <!-- {{{ Synopsis -->
    <classsynopsis>
-    <ooclass><classname>MongoDB\Driver\WriteBatch</classname></ooclass>
+    <ooclass><classname>MongoDB\Driver\BulkWrite</classname></ooclass>
 
 <!-- {{{ Class synopsis -->
     <classsynopsisinfo>
      <modifier>final</modifier>
      <ooclass>
-      <classname>MongoDB\Driver\WriteBatch</classname>
+      <classname>MongoDB\Driver\BulkWrite</classname>
      </ooclass>
      
      <oointerface>
@@ -62,61 +62,61 @@
 <!-- }}} -->
     
     <classsynopsisinfo role="comment">&Methods;</classsynopsisinfo>
-    <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('class.mongodb-driver-writebatch')/db:refentry/db:refsect1[@role='description']/descendant::db:methodsynopsis[not(@role='procedural')])" />
+    <xi:include xpointer="xmlns(db=http://docbook.org/ns/docbook) xpointer(id('class.mongodb-driver-bulkwrite')/db:refentry/db:refsect1[@role='description']/descendant::db:methodsynopsis[not(@role='procedural')])" />
    </classsynopsis>
 <!-- }}} -->
 
   </section>
 
-  <section xml:id="mongodb-driver-writebatch.examples">
+  <section xml:id="mongodb-driver-bulkwrite.examples">
    &reftitle.examples;
 
    <example>
-    <title>Mixed write operations sent in groupped batches</title>
+    <title>Mixed write operations sent in groupped writees</title>
     <para>
-     Mixing write operations (insert/update/delete) will create internal sub-batches and will be sent sequentially to the server.
+     Mixing write operations (insert/update/delete) will create internal sub-writees and will be sent sequentially to the server.
     </para>
     <programlisting role="php">
 <![CDATA[
 <?php
-$batch = new MongoDB\Driver\WriteBatch(true);
-$batch->insert($a);
-$batch->update($b, $obj);
-$batch->update($c, $obj);
-$batch->insert($d);
-$batch->insert($e);
-$batch->delete($f);
+$write = new MongoDB\Driver\BulkWrite(true);
+$write->insert($a);
+$write->update($b, $obj);
+$write->update($c, $obj);
+$write->insert($d);
+$write->insert($e);
+$write->delete($f);
 ?>
 ]]>
     </programlisting>
     <para>
-     Will result in 4 batches (round-trips) being executed.
+     Will result in 4 writees (round-trips) being executed.
     </para>
    </example>
    <example>
-    <title>Ordered WriteBatch causing error</title>
+    <title>Ordered BulkWrite causing error</title>
     <programlisting role="php">
 <![CDATA[
 <?php
-$batch = new MongoDB\Driver\WriteBatch(false);
-$batch->delete([]);
-$batch->insert(["_id" => 1]);
-$batch->insert(["_id" => 2]);
+$write = new MongoDB\Driver\BulkWrite(false);
+$write->delete([]);
+$write->insert(["_id" => 1]);
+$write->insert(["_id" => 2]);
 
-$batch->insert(["_id" => 3, "hello" => "world"]);
-$batch->update(["_id" => 3], ['$set' => ["hello" => "earth"]]);
+$write->insert(["_id" => 3, "hello" => "world"]);
+$write->update(["_id" => 3], ['$set' => ["hello" => "earth"]]);
 
-$batch->insert(["_id" => 4, "hello" => "pluto"]);
-$batch->update(["_id" => 4], ['$set' => ["hello" => "moon"]]);
+$write->insert(["_id" => 4, "hello" => "pluto"]);
+$write->update(["_id" => 4], ['$set' => ["hello" => "moon"]]);
 
-$batch->insert(["_id" => 3]);
-$batch->insert(["_id" => 4]);
-$batch->insert(["_id" => 5]);
+$write->insert(["_id" => 3]);
+$write->insert(["_id" => 4]);
+$write->insert(["_id" => 5]);
 
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 try {
-    $result = $manager->executeWriteBatch("databaseName.collectionName", $batch, $writeConcern);
+    $result = $manager->executeBulkWrite("databaseName.collectionName", $write, $writeConcern);
 } catch(MongoDB\Driver\DuplicateKeyException $ex) {
     $result = $ex->getWriteResult();
     printf("Inserted %d document(s)\n", $result->getInsertedCount());
@@ -175,7 +175,7 @@ Operation#7: E11000 duplicate key error index: databaseName.collectionName.$_id_
    <programlisting role="php">
 <![CDATA[
 <?php
-$batch = new MongoDB\Driver\WriteBatch(false);
+$write = new MongoDB\Driver\BulkWrite(false);
 /* ... */
 ?>
 ]]>
@@ -192,10 +192,10 @@ Operation#8: E11000 duplicate key error index: databaseName.collectionName.$_id_
    </screen>
   </section>
 
-  <section xml:id="mongodb-driver-writebatch.seealso">
+  <section xml:id="mongodb-driver-bulkwrite.seealso">
    &reftitle.seealso;
    <simplelist>
-    <member><methodname>MongoDB\Driver\Manager::executeWriteBatch</methodname></member>
+    <member><methodname>MongoDB\Driver\Manager::executeBulkWrite</methodname></member>
     <member><classname>MongoDB\Driver\WriteResult</classname></member>
     <member><classname>MongoDB\Driver\WriteConcern</classname></member>
     <member><classname>MongoDB\Driver\WriteConcernError</classname></member>
@@ -205,7 +205,7 @@ Operation#8: E11000 duplicate key error index: databaseName.collectionName.$_id_
 
  </partintro>
 
- &reference.phongo.mongodb.driver.entities.writebatch;
+ &reference.phongo.mongodb.driver.entities.bulkwrite;
 
 </phpdoc:classref>
 

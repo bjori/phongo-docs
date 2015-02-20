@@ -18,7 +18,7 @@
     minimal API for core driver functionality:
     <link linkend="class.mongodb-driver-command">commands</link>,
     <link linkend="class.mongodb-driver-query">queries</link>,
-    <link linkend="class.mongodb-driver-writebatch">writes</link>,
+    <link linkend="class.mongodb-driver-bulkwrite">writes</link>,
     <link linkend="class.mongodb-driver-manager">connection management</link>
     and <link linkend="book.bson">BSON serialization</link>.
    </simpara>
@@ -56,7 +56,7 @@
   &reference.phongo.mongodb.driver.manager;
   &reference.phongo.mongodb.driver.command;
   &reference.phongo.mongodb.driver.query;
-  &reference.phongo.mongodb.driver.writebatch;
+  &reference.phongo.mongodb.driver.bulkwrite;
 
   &reference.phongo.mongodb.driver.result;
 
