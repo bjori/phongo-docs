@@ -55,6 +55,7 @@
   &reftitle.errors;
   <simplelist>
    &phongo.throws.std;
+   &phongo.throws.executesingle;
    <member>Throws <classname>MongoDB\Driver\RuntimeException</classname> on other errors (invalid command, command arguments, ...)</member>
   </simplelist>
  </refsect1>

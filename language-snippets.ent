@@ -121,18 +121,15 @@ Optionally, a <classname>MongoDB\Driver\WriteConcern</classname>. If none given,
   </para>
 '>
 <!ENTITY phongo.throws.onfailure 'throws exception (instanceof <classname xmlns="http://docbook.org/ns/docbook" >MongoDB\Driver\Exception</classname>) on failure'>
-<!ENTITY phongo.throws.std '&phongo.throws.argumentparsing;&phongo.throws.duplicatekey;&phongo.throws.authentication;&phongo.throws.connection;'>
+<!ENTITY phongo.throws.std '&phongo.throws.authentication;&phongo.throws.connection;'>
+<!ENTITY phongo.throws.executesingle '&phongo.throws.duplicatekey;&phongo.throws.writeexception;&phongo.throws.writeconcernexception;'>
+<!ENTITY phongo.throws.bulkwriteexception '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\BulkWriteException</classname> on any write failure (WriteError and WriteConcern failures)</member>'>
 <!ENTITY phongo.throws.argumentparsing '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\InvalidArgumentException</classname> on argument parsing errors.</member>'>
 <!ENTITY phongo.throws.duplicatekey '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\DuplicateKeyException</classname> if a write causes Duplicate Key error</member>'>
+<!ENTITY phongo.throws.writeexception '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\WriteException</classname> on Write Error</member>'>
+<!ENTITY phongo.throws.writeconcernexception '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\WriteConcernException</classname> on Write Concern failure</member>'>
 <!ENTITY phongo.throws.authentication '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\AuthenticationException</classname> if authentication is needed and fails</member>'>
 <!ENTITY phongo.throws.connection '<member xmlns="http://docbook.org/ns/docbook">Throws <classname>MongoDB\Driver\ConnectionException</classname> if connection to the server fails for other then authentication reasons</member>'>
-<!ENTITY phongo.warning.noexception '   
-  <warning xmlns="http://docbook.org/ns/docbook">
-   <para>
-    No exception is thrown on write error.
-   </para>
-  </warning>
-'> 
 <!ENTITY phongo.note.getwriteerrors '   
   <note xmlns="http://docbook.org/ns/docbook">
    <para>

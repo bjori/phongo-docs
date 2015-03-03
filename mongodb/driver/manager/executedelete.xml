@@ -40,10 +40,10 @@
   &reftitle.errors;
   <simplelist>
    &phongo.throws.std;
+   &phongo.throws.executesingle;
    <member>Throws <classname>InvalidArgumentException</classname> if <parameter>namespace</parameter> is not on the form '<literal>databaseName.collectionName</literal>'.</member>
    <member>Throws <classname>MongoDB\Driver\RuntimeException</classname> on other errors.</member>
   </simplelist>
-  &phongo.warning.noexception;
  </refsect1>
 
  <refsect1 role="examples">

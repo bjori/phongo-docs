@@ -108,6 +108,8 @@
    &reference.phongo.mongodb.driver.sslconnectionexception;
    &reference.phongo.mongodb.driver.authenticationexception;
    &reference.phongo.mongodb.driver.writeexception;
+   &reference.phongo.mongodb.driver.bulkwriteexception;
+   &reference.phongo.mongodb.driver.writeconcernexception;
    &reference.phongo.mongodb.driver.duplicatekeyexception;
  </book>
 
